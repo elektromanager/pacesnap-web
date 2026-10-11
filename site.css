@@ -1,0 +1,43 @@
+:root {
+  --bg: #0e0e12; --surface: #19191f; --text: #f4f4f6; --muted: #a3a3ad;
+  --work: #ff3b30; --rest: #2fd675; --prepare: #0a5fd9; --cooldown: #b768f2;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  display: flex; justify-content: center; min-height: 100vh;
+}
+main { width: 100%; max-width: 480px; padding: 24px 16px 48px; }
+header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.brand { color: var(--muted); font-weight: 700; letter-spacing: .14em; font-size: 13px; text-transform: uppercase; text-decoration: none; }
+.lang { display: flex; gap: 4px; background: var(--surface); border-radius: 999px; padding: 3px; }
+.lang button {
+  border: 0; background: transparent; color: var(--muted); font: inherit; font-size: 13px;
+  font-weight: 700; padding: 4px 12px; border-radius: 999px; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+h1 { font-size: 30px; line-height: 1.2; margin: 6px 0 20px; overflow-wrap: anywhere; }
+h2 { font-size: 18px; margin: 28px 0 8px; }
+.card { background: var(--surface); border-radius: 20px; padding: 18px; margin-bottom: 20px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stat .v { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.stat .l { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
+.stat.work .v { color: var(--work); } .stat.rest .v { color: var(--rest); }
+.extra { color: var(--muted); margin-top: 14px; font-size: 15px; }
+.extra:empty { display: none; }
+.btn {
+  display: block; text-align: center; text-decoration: none; font-weight: 800;
+  letter-spacing: .04em; border-radius: 16px; padding: 16px; margin-bottom: 12px;
+}
+.primary { background: linear-gradient(135deg, var(--work), #b3271f); color: #fff; }
+.secondary { background: var(--surface); color: var(--text); }
+.hint, .muted { color: var(--muted); }
+.hint { font-size: 14px; text-align: center; }
+ul.features { padding: 0; list-style: none; }
+ul.features li { background: var(--surface); border-radius: 16px; padding: 14px 16px; margin-bottom: 10px; }
+ul.features b { display: block; }
+ul.features span { color: var(--muted); font-size: 15px; }
+footer { margin-top: 32px; color: var(--muted); font-size: 13px; text-align: center; }
+footer a { color: var(--muted); }

@@ -4,20 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PaceSnap – HIIT & Tabata Timer</title>
-<style>
-  body { margin: 0; background: #0e0e12; color: #f4f4f6; font: 16px/1.5 system-ui, sans-serif; display: flex; justify-content: center; }
-  main { max-width: 440px; padding: 48px 16px; }
-  h1 { font-size: 32px; margin: 0 0 12px; }
-  p { color: #a3a3ad; }
-  a { display: inline-block; margin-top: 12px; padding: 14px 20px; border-radius: 16px; background: #ff3b30; color: #fff; font-weight: 800; text-decoration: none; }
-</style>
+<meta name="description" content="Intervall-Timer mit natürlicher Coach-Stimme · Interval timer with a natural coach voice">
+<link rel="stylesheet" href="site.css">
 </head>
 <body>
 <main>
-  <h1>PaceSnap</h1>
-  <p>Intervall-Timer für Tabata und HIIT mit natürlicher Coach-Stimme. Kein Konto, keine Werbung, funktioniert offline.</p>
-  <p>Interval timer for Tabata and HIIT with a natural coach voice. No account, no ads, works offline.</p>
-  <a href="https://play.google.com/store/apps/details?id=com.pacesnap.pacesnap">Google Play</a>
+  <header>
+    <span class="brand">PaceSnap</span>
+    <nav class="lang" aria-label="Sprache / Language">
+      <button type="button" data-lang="de">DE</button>
+      <button type="button" data-lang="en">EN</button>
+    </nav>
+  </header>
+  <h1 data-t="headline"></h1>
+  <p class="muted" data-t="intro"></p>
+  <ul class="features">
+    <li><b data-t="f1"></b><span data-t="f1d"></span></li>
+    <li><b data-t="f2"></b><span data-t="f2d"></span></li>
+    <li><b data-t="f3"></b><span data-t="f3d"></span></li>
+    <li><b data-t="f4"></b><span data-t="f4d"></span></li>
+  </ul>
+  <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.pacesnap.pacesnap" data-t="install"></a>
 </main>
+<script src="i18n.js"></script>
+<script>
+  initI18n({
+    de: {
+      headline: 'Intervall-Timer mit natürlicher Coach-Stimme',
+      intro: 'PaceSnap führt dich durch Tabata, HIIT und Zirkeltraining – du musst nicht aufs Handy schauen.',
+      f1: 'Ein Tipp und los', f1d: 'Klassisches Tabata ist sofort startklar, eigene Workouts in Sekunden angelegt.',
+      f2: 'Natürliche Coach-Stimmen', f2d: 'Auf Deutsch und Englisch, direkt auf deinem Handy erzeugt.',
+      f3: 'Workouts teilen', f3d: 'Per Link oder QR-Code – ideal für Trainingspartner und Trainer.',
+      f4: 'Privat und offline', f4d: 'Kein Konto, keine Werbung, kein Tracking.',
+      install: 'Bei Google Play laden',
+    },
+    en: {
+      headline: 'Interval timer with a natural coach voice',
+      intro: "PaceSnap guides you through Tabata, HIIT and circuit training – you don't have to look at your phone.",
+      f1: 'One tap and go', f1d: 'Classic Tabata is ready right away, your own workouts take seconds.',
+      f2: 'Natural coach voices', f2d: 'In English and German, generated right on your phone.',
+      f3: 'Share workouts', f3d: 'By link or QR code – great for training buddies and trainers.',
+      f4: 'Private and offline', f4d: 'No account, no ads, no tracking.',
+      install: 'Get it on Google Play',
+    },
+  });
+</script>
 </body>
 </html>

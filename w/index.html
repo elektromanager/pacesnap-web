@@ -6,42 +6,18 @@
 <meta name="robots" content="noindex">
 <title>PaceSnap Workout</title>
 <meta property="og:title" content="PaceSnap Workout">
-<meta property="og:description" content="Ein Intervall-Workout für PaceSnap – mit natürlicher Coach-Stimme.">
-<style>
-  :root {
-    --bg: #0e0e12; --surface: #19191f; --text: #f4f4f6; --muted: #a3a3ad;
-    --work: #ff3b30; --rest: #2fd675; --prepare: #0a5fd9; --cooldown: #b768f2;
-  }
-  * { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-  body {
-    margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    display: flex; justify-content: center; min-height: 100vh;
-  }
-  main { width: 100%; max-width: 440px; padding: 32px 16px 48px; }
-  .brand { color: var(--muted); font-weight: 700; letter-spacing: .14em; font-size: 13px; text-transform: uppercase; }
-  h1 { font-size: 30px; line-height: 1.2; margin: 6px 0 20px; overflow-wrap: anywhere; }
-  .card { background: var(--surface); border-radius: 20px; padding: 18px; margin-bottom: 20px; }
-  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .stat .v { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
-  .stat .l { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: .08em; }
-  .stat.work .v { color: var(--work); } .stat.rest .v { color: var(--rest); }
-  .extra { color: var(--muted); margin-top: 14px; font-size: 15px; }
-  .extra:empty { display: none; }
-  .btn {
-    display: block; text-align: center; text-decoration: none; font-weight: 800;
-    letter-spacing: .04em; border-radius: 16px; padding: 16px; margin-bottom: 12px;
-  }
-  .primary { background: linear-gradient(135deg, var(--work), #b3271f); color: #fff; }
-  .secondary { background: var(--surface); color: var(--text); }
-  .hint { color: var(--muted); font-size: 14px; text-align: center; }
-  .error { color: var(--muted); }
-</style>
+<meta property="og:description" content="Ein Intervall-Workout für PaceSnap · An interval workout for PaceSnap">
+<link rel="stylesheet" href="../site.css">
 </head>
 <body>
 <main>
-  <div class="brand">PaceSnap</div>
+  <header>
+    <a class="brand" href="../">PaceSnap</a>
+    <nav class="lang" aria-label="Sprache / Language">
+      <button type="button" data-lang="de">DE</button>
+      <button type="button" data-lang="en">EN</button>
+    </nav>
+  </header>
   <h1 id="title">Workout</h1>
   <div class="card" id="details" hidden>
     <div class="grid">
@@ -52,40 +28,40 @@
     </div>
     <div class="extra" id="extra"></div>
   </div>
-  <p class="error" id="error" hidden data-t="invalid"></p>
+  <p class="muted" id="error" hidden data-t="invalid"></p>
   <a class="btn primary" id="open" href="#" data-t="open"></a>
   <a class="btn secondary" id="store" data-t="install"></a>
   <p class="hint" data-t="hint"></p>
 </main>
+<script src="../i18n.js"></script>
 <script>
   const PACKAGE = 'com.pacesnap.pacesnap';
   const STORE = 'https://play.google.com/store/apps/details?id=' + PACKAGE;
-  const de = (navigator.language || 'en').toLowerCase().startsWith('de');
-  const T = de ? {
-    work: 'Belastung', rest: 'Pause', sets: 'Sätze', total: 'Dauer',
-    rounds: n => n + ' Runden', exercises: 'Übungen', coach: 'Coach',
-    open: 'IN PACESNAP ÖFFNEN', install: 'PaceSnap installieren',
-    hint: 'Kostenlos für Android. Das Workout wird beim Öffnen in die App übernommen.',
-    invalid: 'Dieser Link enthält kein gültiges Workout. Frag nach einem neuen Link.',
-  } : {
-    work: 'Work', rest: 'Rest', sets: 'Sets', total: 'Duration',
-    rounds: n => n + ' rounds', exercises: 'Exercises', coach: 'Coach',
-    open: 'OPEN IN PACESNAP', install: 'Get PaceSnap',
-    hint: 'Free for Android. Opening the link adds the workout to the app.',
-    invalid: "This link doesn't contain a valid workout. Ask for a new link.",
+  const T = {
+    de: {
+      work: 'Belastung', rest: 'Pause', sets: 'Sätze', total: 'Dauer',
+      rounds: n => n + ' Runden', exercises: 'Übungen', coach: 'Coach',
+      open: 'IN PACESNAP ÖFFNEN', install: 'PaceSnap installieren',
+      hint: 'Kostenlos für Android. Das Workout wird beim Öffnen in die App übernommen.',
+      invalid: 'Dieser Link enthält kein gültiges Workout. Frag nach einem neuen Link.',
+    },
+    en: {
+      work: 'Work', rest: 'Rest', sets: 'Sets', total: 'Duration',
+      rounds: n => n + ' rounds', exercises: 'Exercises', coach: 'Coach',
+      open: 'OPEN IN PACESNAP', install: 'Get PaceSnap',
+      hint: 'Free for Android. Opening the link adds the workout to the app.',
+      invalid: "This link doesn't contain a valid workout. Ask for a new link.",
+    },
   };
-  if (!de) document.documentElement.lang = 'en';
-  document.querySelectorAll('[data-t]').forEach(el => el.textContent = T[el.dataset.t]);
 
   const data = location.hash.slice(1);
-  const store = document.getElementById('store');
-  store.href = STORE;
+  const $ = id => document.getElementById(id);
+  $('store').href = STORE;
   // Opens the app via its pacesnap:// filter; without the app, Android
   // falls back to the Play Store.
-  document.getElementById('open').href =
-    'intent://import?d=' + data + '#Intent;scheme=pacesnap;package=' + PACKAGE +
-    ';S.browser_fallback_url=' + encodeURIComponent(STORE) + ';end';
-  if (!/android/i.test(navigator.userAgent)) document.getElementById('open').hidden = true;
+  $('open').href = 'intent://import?d=' + data + '#Intent;scheme=pacesnap;package=' +
+    PACKAGE + ';S.browser_fallback_url=' + encodeURIComponent(STORE) + ';end';
+  if (!/android/i.test(navigator.userAgent)) $('open').hidden = true;
 
   // Same format as PresetShare in the app: base64url → raw deflate → JSON.
   async function decode(s) {
@@ -96,26 +72,35 @@
   }
   const sec = n => n >= 60 ? Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0') + ' min' : n + ' s';
 
-  decode(data).then(w => {
-    if (w.v !== 1) throw new Error('version');
+  let workout = null;
+  function render(t) {
+    if (!workout) return;
+    const w = workout;
     const sets = w.s || 1, cycles = w.c || 1, work = w.w || 0, rest = w.r || 0;
     const total = (w.p || 0) + cycles * (sets * work + (sets - 1) * rest)
       + (cycles - 1) * (w.rc || 0) + (w.cd || 0);
-    document.getElementById('title').textContent = w.t || 'Workout';
+    $('title').textContent = w.t || 'Workout';
     document.title = (w.t || 'Workout') + ' · PaceSnap';
-    document.getElementById('work').textContent = work + ' s';
-    document.getElementById('rest').textContent = rest + ' s';
-    document.getElementById('sets').textContent = cycles > 1 ? sets + ' × ' + cycles : sets;
-    document.getElementById('total').textContent = sec(total);
+    $('work').textContent = work + ' s';
+    $('rest').textContent = rest + ' s';
+    $('sets').textContent = cycles > 1 ? sets + ' × ' + cycles : sets;
+    $('total').textContent = sec(total);
     const extra = [];
-    if (cycles > 1) extra.push(T.rounds(cycles));
-    if (w.x && w.x.length) extra.push(T.exercises + ': ' + [...new Set(w.x)].join(', '));
-    if (w.co) extra.push(T.coach + ': ' + w.co.charAt(0).toUpperCase() + w.co.slice(1));
-    document.getElementById('extra').textContent = extra.join(' · ');
-    document.getElementById('details').hidden = false;
+    if (cycles > 1) extra.push(t.rounds(cycles));
+    if (w.x && w.x.length) extra.push(t.exercises + ': ' + [...new Set(w.x)].join(', '));
+    if (w.co) extra.push(t.coach + ': ' + w.co.charAt(0).toUpperCase() + w.co.slice(1));
+    $('extra').textContent = extra.join(' · ');
+    $('details').hidden = false;
+  }
+
+  initI18n(T, render);
+  decode(data).then(w => {
+    if (w.v !== 1) throw new Error('version');
+    workout = w;
+    render(T[currentLang()]);
   }).catch(() => {
-    document.getElementById('error').hidden = false;
-    document.getElementById('open').hidden = true;
+    $('error').hidden = false;
+    $('open').hidden = true;
   });
 </script>
 </body>
