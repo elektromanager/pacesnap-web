@@ -32,6 +32,11 @@
   <a class="btn primary" id="open" href="#" data-t="open"></a>
   <a class="btn secondary" id="store" data-t="install"></a>
   <p class="hint" data-t="hint"></p>
+  <footer class="legal-links">
+    <a data-href-de="https://systemwolf-dev.de/impressum.html" data-href-en="https://systemwolf-dev.de/imprint.html" data-t="imprint"></a>
+    ·
+    <a data-href-de="https://systemwolf-dev.de/datenschutz.html" data-href-en="https://systemwolf-dev.de/privacy.html" data-t="privacy"></a>
+  </footer>
 </main>
 <script src="../i18n.js"></script>
 <script>
@@ -39,6 +44,7 @@
   const STORE = 'https://play.google.com/store/apps/details?id=' + PACKAGE;
   const T = {
     de: {
+      imprint: 'Impressum', privacy: 'Datenschutz',
       work: 'Belastung', rest: 'Pause', sets: 'Sätze', total: 'Dauer',
       rounds: n => n + ' Runden', exercises: 'Übungen', coach: 'Coach',
       open: 'IN PACESNAP ÖFFNEN', install: 'PaceSnap installieren',
@@ -46,6 +52,7 @@
       invalid: 'Dieser Link enthält kein gültiges Workout. Frag nach einem neuen Link.',
     },
     en: {
+      imprint: 'Imprint', privacy: 'Privacy',
       work: 'Work', rest: 'Rest', sets: 'Sets', total: 'Duration',
       rounds: n => n + ' rounds', exercises: 'Exercises', coach: 'Coach',
       open: 'OPEN IN PACESNAP', install: 'Get PaceSnap',

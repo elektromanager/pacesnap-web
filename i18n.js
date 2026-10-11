@@ -27,6 +27,8 @@
         const v = t[el.dataset.t];
         if (typeof v === 'string') el.textContent = v;
       });
+      document.querySelectorAll('[data-href-' + lang + ']').forEach(a =>
+        a.href = a.getAttribute('data-href-' + lang));
       document.querySelectorAll('[data-lang]').forEach(b =>
         b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
       if (onChange) onChange(t);
