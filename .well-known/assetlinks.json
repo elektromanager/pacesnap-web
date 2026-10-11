@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.pacesnap.pacesnap",
+      "sha256_cert_fingerprints": [
+        "40:5F:2A:BC:4B:D8:19:25:8B:DD:68:71:B4:FB:70:27:46:27:E9:FD:94:66:12:A7:DD:AB:56:CA:11:3F:E2:2E",
+        "C8:60:79:71:56:5A:67:29:96:78:99:43:1D:DB:CB:74:3A:9A:7A:13:01:26:16:93:81:41:CA:19:70:DA:8D:17"
+      ]
+    }
+  }
+]
